@@ -38,5 +38,40 @@ echo ""
 echo "Finally, check that no container runs again:"
 docker ps 
 
+echo "" 
+echo "Let's check all running and stopped containers:"
+docker ps -a 
+
+echo ""
+echo "Let's download Python3 and Python2 images:"
+docker pull python:3
+docker pull python:2
+
+echo ""
+echo "Ok, that worked out. Let's now look at all the images we have downloaded so far:"
+docker images
+
+echo ""
+echo "Not that many yet, but let's assume we don't need Ubuntu anymore."
+echo "We first remove the container:"
+docker rmi ubntu 
+
+echo "This fails because a container is still using the image."
+echo "We have two options now, remove associated container and then the image OR force to remove the docker image."
+
+echo ""
+echo "Let's try option number 1"
+echo "We list all the containers that use the ubuntu image"
+echo "explanation of the tags:"
+echo "-a: all containers are listed"
+echo "-q: only container ids to be displayed"
+echo "-f: filter by a condition provided"
+echo "Filtering based on the 'ancestor', i.e., the containers that use a certain image."
+docker rm `docker ps -aqf "ancestor=ubuntu"`
+
+echo ""
+echo "Now we can proceed with removing the image:"
+docker rmi ubuntu
+
 echo ""
 echo "Done for now."
