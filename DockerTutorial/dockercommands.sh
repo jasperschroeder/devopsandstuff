@@ -35,6 +35,19 @@ echo "Shutting down container (No grace period, sorry): "
 docker stop `docker ps -q ` -t 0
 
 echo ""
+echo "Now, let's run a Docker container with the ubuntu image and assign it a name"
+start docker run -it --name ubuntu_container ubuntu 
+
+echo ""
+echo "We can now also stop it by passing the image name."
+docker stop ubuntu_container -t 5
+
+echo ""
+echo "Now that it is stopped, let's look at the logs (will be empty though, because we didn't run any commans)."
+echo "However, this is only for illustrative purposes."
+docker logs ubuntu_container 
+
+echo ""
 echo "Finally, check that no container runs again:"
 docker ps 
 
